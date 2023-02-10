@@ -33,3 +33,27 @@ export type FormProps = {
   title?: string;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
 };
+
+export type User = {
+  name: string;
+  email: string;
+  token: string;
+};
+
+export type UserState = {
+  user: User | null;
+};
+
+export enum USER_ACTIONS {
+  REGISTER = 'REGISTER',
+}
+
+export type UserReducerAction = {
+  type: USER_ACTIONS;
+  payload: any;
+};
+
+export type UserContextProps = {
+  state: UserState;
+  dispatch: React.Dispatch<UserReducerAction>;
+};
