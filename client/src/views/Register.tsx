@@ -96,7 +96,7 @@ function Register() {
         errors={errors.password_confirmation}
       />
 
-      <Button type="submit" className="w-full" disabled={isLoading}>
+      <Button type="submit" className="w-full bg-secondary" disabled={isLoading}>
         Sign Up
       </Button>
 

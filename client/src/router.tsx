@@ -4,6 +4,7 @@ import AuthLayout from './components/AuthLayout';
 import Register from './views/Register';
 import Login from './views/Login';
 import Home from './views/Home';
+import CreateShipment from './views/CreateShipment';
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Navigate to="shipments" />,
+      },
+      {
+        path: 'shipments',
         element: <Home />,
+      },
+      {
+        path: '/shipments/create',
+        element: <CreateShipment />,
       },
     ],
   },

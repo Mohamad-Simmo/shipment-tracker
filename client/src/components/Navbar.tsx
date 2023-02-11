@@ -2,11 +2,18 @@ import { logoutUser } from '../api';
 import { useUserContext } from '../context/ContextProvider';
 import { USER_ACTIONS } from '../types';
 import { Link } from 'react-router-dom';
+import { SiLinuxcontainers } from 'react-icons/si';
 
 function Brand() {
   return (
-    <Link to="/" className="text-4xl font-semibold text-light">
-      Shipment Tracker
+    <Link
+      to="/"
+      className="flex items-center gap-2 text-3xl font-semibold text-white"
+    >
+      <span>
+        <SiLinuxcontainers />
+      </span>
+      <span className="hidden sm:block">Shipment Tracker</span>
     </Link>
   );
 }

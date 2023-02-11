@@ -66,7 +66,7 @@ function Login() {
         errors={errors.password}
       />
 
-      <Button disabled={isLoading} type="submit" className="w-full">
+      <Button disabled={isLoading} type="submit" className="w-full bg-secondary">
         Login
       </Button>
 

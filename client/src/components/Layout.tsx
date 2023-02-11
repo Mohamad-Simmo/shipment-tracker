@@ -14,10 +14,12 @@ function Layout() {
   }, [state.user, navigate]);
 
   return (
-    <>
+    <div className="min-h-screen bg-light">
       <Navbar />
-      <Outlet />
-    </>
+      <div className="mx-auto min-h-[calc(100vh-4rem)] max-w-6xl p-4">
+        <Outlet />
+      </div>
+    </div>
   );
 }
 export default Layout;
