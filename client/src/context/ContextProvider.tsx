@@ -1,16 +1,13 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import {
-  User,
   UserState,
   UserContextProps,
   UserReducerAction,
   USER_ACTIONS,
 } from '../types';
 
-const user: User = JSON.parse(localStorage.getItem('user') || '');
-
 const initialState: UserState = {
-  user: user,
+  user: JSON.parse(localStorage.getItem('user') || '{}'),
 };
 
 const UserContext = createContext<UserContextProps>({
@@ -23,7 +20,8 @@ const userReducer = (
   action: UserReducerAction
 ): UserState => {
   switch (action.type) {
-    case USER_ACTIONS.REGISTER:
+    case USER_ACTIONS.LOGIN:
+      localStorage.setItem('user', JSON.stringify(action.payload));
       return {
         user: action.payload,
       };

@@ -45,7 +45,7 @@ export type UserState = {
 };
 
 export enum USER_ACTIONS {
-  REGISTER = 'REGISTER',
+  LOGIN = 'LOGIN',
 }
 
 export type UserReducerAction = {

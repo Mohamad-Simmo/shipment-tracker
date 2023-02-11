@@ -1,6 +1,7 @@
 import { FieldValues } from 'react-hook-form';
 import { useId } from 'react';
 import { GenericInputProps } from '../types';
+import ErrorMessage from './ErrorMessage';
 
 function Input<T extends FieldValues>({
   label,
@@ -29,6 +30,7 @@ function Input<T extends FieldValues>({
         type={type}
         {...register(label, options)}
       />
+      {errors && <ErrorMessage message={errors.message} />}
     </div>
   );
 }
