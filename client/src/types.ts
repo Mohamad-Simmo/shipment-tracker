@@ -46,11 +46,12 @@ export type UserState = {
 
 export enum USER_ACTIONS {
   LOGIN = 'LOGIN',
+  LOGOUT = 'LOGOUT',
 }
 
 export type UserReducerAction = {
   type: USER_ACTIONS;
-  payload: any;
+  payload?: any;
 };
 
 export type UserContextProps = {

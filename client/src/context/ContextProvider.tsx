@@ -25,8 +25,9 @@ const userReducer = (
       return {
         user: action.payload,
       };
-    default:
-      return state;
+    case USER_ACTIONS.LOGOUT:
+      localStorage.removeItem('user');
+      return { user: null };
   }
 };
 

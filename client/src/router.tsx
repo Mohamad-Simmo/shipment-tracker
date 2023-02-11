@@ -3,11 +3,18 @@ import Layout from './components/Layout';
 import AuthLayout from './components/AuthLayout';
 import Register from './views/Register';
 import Login from './views/Login';
+import Home from './views/Home';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+    ],
   },
   {
     path: '/auth',

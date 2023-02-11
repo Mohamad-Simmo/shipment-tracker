@@ -24,13 +24,7 @@ class UserController extends Controller
             'password' => bcrypt($fields['password'])
         ]);
 
-        $token = $user->createToken('token')->plainTextToken;
-
-        return response([
-            'name' => $user->name,
-            'email' => $user->email,
-            'token' => $token
-        ], 201);
+        return $this->createTokenResponse($user);
     }
 
     public function login(Request $request)
@@ -48,6 +42,18 @@ class UserController extends Controller
             ], 400);
         }
 
+        return $this->createTokenResponse($user);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response(["message" => 'Logged out'], 200);
+    }
+
+    private function createTokenResponse(User $user)
+    {
         $token = $user->createToken('token')->plainTextToken;
 
         return response([

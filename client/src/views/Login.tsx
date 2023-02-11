@@ -23,6 +23,7 @@ function Login() {
   } = useForm<LoginInputs>();
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+    setIsLoading(true);
     loginUser(data)
       .then((response) => {
         dispatch({
