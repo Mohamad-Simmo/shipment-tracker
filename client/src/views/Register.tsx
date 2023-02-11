@@ -15,7 +15,7 @@ function Register() {
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState('');
 
-  const { dispatch, state } = useUserContext();
+  const { dispatch } = useUserContext();
 
   const {
     register,
