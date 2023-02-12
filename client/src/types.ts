@@ -28,6 +28,14 @@ export type RegisterInputs = {
   password_confirmation: string;
 };
 
+export type ShipmentInputs = {
+  origin: string;
+  destination: string;
+  weight: number;
+  status: 'pending' | 'in transit' | 'delivered' | 'exception';
+  description: string;
+};
+
 export type FormProps = {
   children?: React.ReactNode;
   title?: string;
@@ -57,4 +65,18 @@ export type UserReducerAction = {
 export type UserContextProps = {
   state: UserState;
   dispatch: React.Dispatch<UserReducerAction>;
+};
+
+export type Customer = {
+  id: number;
+  contact_id: number;
+  contact: Contact;
+};
+
+export type Contact = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
 };

@@ -5,6 +5,8 @@ import Register from './views/Register';
 import Login from './views/Login';
 import Home from './views/Home';
 import CreateShipment from './views/CreateShipment';
+import Customers from './views/Customers';
+import Carriers from './views/Carriers';
 
 const router = createBrowserRouter([
   {
@@ -20,8 +22,16 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/shipments/create',
+        path: 'shipments/create',
         element: <CreateShipment />,
+      },
+      {
+        path: 'customers',
+        element: <Customers />,
+      },
+      {
+        path: 'carriers',
+        element: <Carriers />,
       },
     ],
   },

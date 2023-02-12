@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LoginInputs, RegisterInputs } from './types';
+import { Customer, LoginInputs, RegisterInputs } from './types';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api',
@@ -35,4 +35,8 @@ export const loginUser = (data: LoginInputs) => {
 
 export const logoutUser = () => {
   return axiosToken.delete('/users/logout');
+};
+
+export const getCustomers = async () => {
+  return (await axiosToken.get<Customer[]>('/customers')).data;
 };
