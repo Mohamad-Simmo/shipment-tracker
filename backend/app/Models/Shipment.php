@@ -9,13 +9,11 @@ class Shipment extends Model
 {
     use HasFactory;
 
-    public function users()
-    {
-        return $this->belongsTo(User::class, 'user_id');
+    public function waybill() {
+        return $this->hasOne(Shipment::class);
     }
 
-    public function customers()
-    {
-        return $this->belongsTo(Customer::class, 'customer_id');
+    public function carrier() {
+        return $this->hasOne(Carrier::class);
     }
 }

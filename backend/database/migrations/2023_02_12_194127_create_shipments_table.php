@@ -14,15 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('shipments', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->foreignId('user_id')
-                ->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('customer_id')
-                ->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('origin');
-            $table->string('destination');
-            $table->enum('status', ['pending', 'in transit', 'delivered', 'exception'])->default('pending');
+            $table->id();
+            $table->foreignId('waybill_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('carrier_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('status', ['pending', 'in transit', 'delivered', 'exception'])
+                ->default('pending');
+            $table->decimal('weight', 8, 2);
+            $table->dateTime('shipping_date');
+            $table->dateTime('delivery_date');
+            $table->string('instructions');
             $table->string('description')->nullable();
+            $table->string('exception')->nullable();
             $table->timestamps();
         });
     }

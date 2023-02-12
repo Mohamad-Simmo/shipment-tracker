@@ -9,8 +9,22 @@ class Customer extends Model
 {
     use HasFactory;
 
-    public function shipments()
+    protected $fillable = [
+        'contact_id',
+    ];
+
+    public function contact()
     {
-        return $this->hasMany(Shipment::class, 'customer_id');
+        return $this->belongsTo(Contact::class);
+    }
+
+    public function shipper()
+    {
+        return $this->hasMany(Waybill::class, 'shipper_id');
+    }
+
+    public function recipient()
+    {
+        return $this->hasMany(Waybill::class, 'recipient_id');
     }
 }
