@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCustomers } from '../api';
+import { getCarriers } from '../api';
 
-function useCustomers() {
+function useCarriers() {
   const { data, isLoading, isError, error } = useQuery(
-    ['customers'],
-    getCustomers,
+    ['carriers'],
+    getCarriers,
     {
       staleTime: Infinity,
     }
@@ -12,4 +12,4 @@ function useCustomers() {
 
   return { data, isLoading, isError, error };
 }
-export default useCustomers;
+export default useCarriers;

@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { Carrier, Customer, LoginInputs, RegisterInputs } from './types';
+import {
+  Carrier,
+  Customer,
+  LoginInputs,
+  RegisterInputs,
+  Shipment,
+  ShipmentInputs,
+} from './types';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api',
@@ -41,4 +48,16 @@ export const getCustomers = async () => {
 
 export const getCarriers = async () => {
   return (await axiosToken.get<Carrier[]>('/carriers')).data;
+};
+
+export const createShipment = (data: ShipmentInputs) => {
+  return axiosToken.post('/shipments', data);
+};
+
+export const getShipments = async () => {
+  return (await axiosToken.get<Shipment[]>('/shipments')).data;
+};
+
+export const getShipmentById = async (id: string) => {
+  return (await axiosToken.get<Shipment>('/shipments/' + id)).data;
 };

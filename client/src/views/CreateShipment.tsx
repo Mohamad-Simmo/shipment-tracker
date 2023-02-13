@@ -8,6 +8,10 @@ import useCustomers from '../hooks/useCustomers';
 import { ShipmentInputs } from '../types';
 import Select from '../components/Select';
 import Radio from '../components/Radio';
+import useCarriers from '../hooks/useCarrier';
+import useCreateShipment from '../hooks/useCreateShipment';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Section({
   children,
@@ -25,12 +29,16 @@ function Section({
 }
 
 function CreateShipment() {
-  const { data, isLoading } = useCustomers();
+  const { mutate } = useCreateShipment();
+  const { data: customers } = useCustomers();
+  const { data: carriers } = useCarriers();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<ShipmentInputs>({
     defaultValues: {
@@ -38,8 +46,18 @@ function CreateShipment() {
     },
   });
 
+  useEffect(() => {
+    if (customers && carriers) {
+      setValue('carrier_id', carriers[0].id);
+      setValue('shipper_id', customers[0].id);
+      setValue('recipient_id', customers[1].id);
+    }
+  }, [carriers, customers, setValue]);
+
   const onSubmit: SubmitHandler<ShipmentInputs> = (data) => {
-    console.log(data);
+    mutate(data, {
+      onSuccess: () => navigate('/shipments'),
+    });
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -51,21 +69,34 @@ function CreateShipment() {
           <Section title="Shipping Information">
             <Select
               register={register}
-              options={{ required: true }}
+              options={{ required: true, valueAsNumber: true }}
               name="Shipper"
               label="shipper_id"
-              data={data}
+              data={customers}
             />
             <Select
               register={register}
               options={{
                 required: true,
+                valueAsNumber: true,
                 validate: (value) => value !== watch('shipper_id'),
               }}
               errors={errors.recipient_id}
               name="Recipient"
               label="recipient_id"
-              data={data}
+              data={customers}
+            />
+
+            <Select
+              register={register}
+              options={{
+                required: true,
+                valueAsNumber: true,
+              }}
+              errors={errors.carrier_id}
+              name="Carrier"
+              label="carrier_id"
+              data={carriers}
             />
           </Section>
 

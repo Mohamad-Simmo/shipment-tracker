@@ -9,6 +9,8 @@ class Contact extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     protected $fillable = ['name', 'email', 'phone', 'address'];
 
     public function carrier()

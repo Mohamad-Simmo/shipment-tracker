@@ -9,8 +9,14 @@ class Route extends Model
 {
     use HasFactory;
 
-    public function shipment()
+    protected $hidden = ['created_at', 'updated_at'];
+
+    protected $fillable = [
+        'origin', 'destination', 'stops', 'method'
+    ];
+
+    public function waybill()
     {
-        return $this->belongsTo(Shipment::class);
+        return $this->hasOne(Waybill::class);
     }
 }

@@ -9,9 +9,15 @@ class Waybill extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['created_at', 'updated_at'];
+
+    protected $fillable = [
+        'shipper_id', 'recipient_id', 'route_id'
+    ];
+
     public function route()
     {
-        return $this->hasOne(Route::class);
+        return $this->belongsTo(Route::class);
     }
 
     public function shipper()
@@ -26,6 +32,6 @@ class Waybill extends Model
 
     public function shipment()
     {
-        return $this->belongsTo(Shipment::class);
+        return $this->hasOne(Shipment::class);
     }
 }

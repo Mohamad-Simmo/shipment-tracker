@@ -1,13 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { getCarriers } from '../api';
 import ErrorMessage from '../components/ErrorMessage';
+import useCarriers from '../hooks/useCarrier';
 
 function Carriers() {
-  const { data, isLoading, isError, error } = useQuery(
-    ['carriers'],
-    getCarriers
-  );
+  const { data, isLoading, isError, error } = useCarriers();
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -25,12 +21,12 @@ function Carriers() {
         </tr>
       </thead>
       <tbody>
-        {data.map(({ id, logo, contact }) => (
+        {data?.map(({ id, logo, contact }) => (
           <tr className="border-b-2 border-gray-400" key={id}>
             <td className="p-2">
               <img src={logo} className="h-24 rounded-lg " alt="logo" />
             </td>
-            <td className="p-2"> {contact.name} </td>
+            <td className="p-2">{contact.name}</td>
             <td className="p-2">{contact.email}</td>
             <td className="p-2">{contact.phone}</td>
             <td className="p-2">{contact.address}</td>

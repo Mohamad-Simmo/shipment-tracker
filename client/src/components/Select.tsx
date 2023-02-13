@@ -1,8 +1,8 @@
 import { FieldValues } from 'react-hook-form';
-import { Customer, GenericInputProps } from '../types';
+import { Carrier, Customer, GenericInputProps } from '../types';
 
 type SelectProps<T extends FieldValues> = GenericInputProps<T> & {
-  data: Customer[] | undefined;
+  data: Customer[] | Carrier[] | undefined;
 };
 
 function Select<T extends FieldValues>(props: SelectProps<T>) {
@@ -23,15 +23,15 @@ function Select<T extends FieldValues>(props: SelectProps<T>) {
       <select
         className={`mt-2 w-full rounded-lg border border-gray-400 bg-transparent p-2 outline-none focus:ring-1  ${
           props.errors
-            ? 'border-red-500 focus:border-red-500 focus:ring-red-500 text-red-400'
+            ? 'border-red-500 text-red-400 focus:border-red-500 focus:ring-red-500'
             : 'focus:border-primary focus:ring-primary'
         }`}
         id="shipper"
         {...props.register(props.label, props.options)}
       >
-        {props.data?.map((customer) => (
-          <option className='text-black' key={customer.id} value={customer.id}>
-            {customer.contact.name}
+        {props.data?.map((item) => (
+          <option className="text-black" key={item.id} value={item.id}>
+            {item.contact.name}
           </option>
         ))}
       </select>

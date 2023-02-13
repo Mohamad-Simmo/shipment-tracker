@@ -9,9 +9,9 @@ class Customer extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'contact_id',
-    ];
+    protected $hidden = ['created_at', 'updated_at'];
+
+    protected $fillable = ['contact_id',];
 
     public function contact()
     {

@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CarrierController;
+use App\Http\Controllers\ShipmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +22,14 @@ Route::post('/users/register', [UserController::class, 'register']);
 Route::post('/users/login', [UserController::class, 'login']);
 
 
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/users/logout', [UserController::class, 'logout']);
+    Route::get('/customers', [CustomerController::class, 'index']);
+    Route::get('/carriers', [CarrierController::class, 'index']);
+    Route::get('/shipments', [ShipmentController::class, 'index']);
+    Route::get('/shipments/{id}', [ShipmentController::class, 'show']);
+    Route::post('/shipments', [ShipmentController::class, 'store']);
 });
 
 
