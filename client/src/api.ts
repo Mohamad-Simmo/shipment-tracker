@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Customer, LoginInputs, RegisterInputs } from './types';
+import { Carrier, Customer, LoginInputs, RegisterInputs } from './types';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api',
@@ -20,8 +20,6 @@ axiosToken.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}` || '';
   }
 
-  console.log(config);
-
   return config;
 });
 
@@ -39,4 +37,8 @@ export const logoutUser = () => {
 
 export const getCustomers = async () => {
   return (await axiosToken.get<Customer[]>('/customers')).data;
+};
+
+export const getCarriers = async () => {
+  return (await axiosToken.get<Carrier[]>('/carriers')).data;
 };

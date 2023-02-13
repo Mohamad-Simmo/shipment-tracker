@@ -9,11 +9,12 @@ import {
 export type GenericInputProps<T extends FieldValues> = {
   errors?: FieldError;
   register: UseFormRegister<T>;
-  options: RegisterOptions<T, Path<T>> | undefined;
-  type: 'text' | 'password' | 'email';
+  options?: RegisterOptions<T, Path<T>> | undefined;
+  type?: 'text' | 'password' | 'email' | 'datetime-local';
   placeholder?: string;
   label: Path<T>;
   showLabel?: boolean;
+  name?: string;
 };
 
 export type LoginInputs = {
@@ -29,10 +30,16 @@ export type RegisterInputs = {
 };
 
 export type ShipmentInputs = {
+  shipper_id: number;
+  recipient_id: number;
   origin: string;
   destination: string;
+  stops: string;
+  method: 'sea' | 'air' | 'land';
   weight: number;
-  status: 'pending' | 'in transit' | 'delivered' | 'exception';
+  shipping_date: Date;
+  delivery_date: Date;
+  instructions: string;
   description: string;
 };
 
@@ -70,6 +77,13 @@ export type UserContextProps = {
 export type Customer = {
   id: number;
   contact_id: number;
+  contact: Contact;
+};
+
+export type Carrier = {
+  id: number;
+  contact_id: number;
+  logo: string;
   contact: Contact;
 };
 

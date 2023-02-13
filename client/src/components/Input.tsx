@@ -9,23 +9,34 @@ function Input<T extends FieldValues>({
   register,
   options,
   errors,
-  type,
+  type = 'text',
   placeholder,
-}: GenericInputProps<T>) {
+  className,
+  name,
+}: GenericInputProps<T> & { className?: string }) {
   const id = useId();
 
   return (
-    <div className="flex flex-col">
+    <div className={className}>
       {showLabel && (
-        <label className="mb-2" htmlFor={id}>
-          {label.charAt(0).toUpperCase() + label.slice(1)}
+        <label
+          className={
+            options?.required
+              ? "after:font-semibold after:text-red-500 after:content-['*']"
+              : undefined
+          }
+          htmlFor={id}
+        >
+          {name ? name : label.charAt(0).toUpperCase() + label.slice(1)}
         </label>
       )}
       <input
         id={id}
         className={`${
-          errors && 'border-red-500 ring-red-500 placeholder:text-red-400'
-        } rounded-lg border bg-gray-50  p-2 outline-none ring-primary placeholder:first-letter:uppercase focus:ring-1`}
+          errors
+            ? 'border-red-500 text-red-400 placeholder:text-red-400 focus:ring-red-500'
+            : 'focus:border-primary focus:ring-primary'
+        } form-input mt-2 w-full rounded-lg border border-gray-400 bg-transparent p-2 outline-none placeholder:first-letter:uppercase focus:ring-1`}
         placeholder={placeholder}
         type={type}
         {...register(label, options)}
