@@ -1,5 +1,5 @@
-import useToggle from '../hooks/useToggle';
 import { createPortal } from 'react-dom';
+import { AiOutlineClose } from 'react-icons/ai';
 
 function Backdrop({
   children,
@@ -32,6 +32,11 @@ function Modal({
         onClick={(e) => e.stopPropagation()}
         className="max-h-[80vh] overflow-auto rounded-lg bg-light p-4"
       >
+        <div className="flex justify-end">
+          <button onClick={toggleShow}>
+            <AiOutlineClose className="h-6 w-6" />
+          </button>
+        </div>
         {children}
       </div>
     </Backdrop>

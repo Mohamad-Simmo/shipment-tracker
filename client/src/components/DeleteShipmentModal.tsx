@@ -1,3 +1,4 @@
+import useDeleteShipment from '../hooks/useDeleteShipment';
 import useShipmentById from '../hooks/useShipmentById';
 import Button from './Button';
 import Modal from './Modal';
@@ -9,13 +10,28 @@ function DeleteShipmentModal({
   toggleShow: () => void;
   shipmentId: string;
 }) {
-  const { data } = useShipmentById(shipmentId);
+  const { mutate, isLoading, isSuccess } = useDeleteShipment(shipmentId);
+
+  const handleDelete = () => {
+    mutate();
+    toggleShow();
+  };
 
   return (
     <Modal toggleShow={toggleShow}>
-      <h3 className="text-xl font-semibold mb-7">Delete Shipment?</h3>
-      <Button className="bg-gray-500 mr-3 ml-24">Cancel</Button>
-      <Button className="bg-red-500">Confirm</Button>
+      {isLoading ? (
+        'Deleting...'
+      ) : (
+        <>
+          <h3 className="mb-7 text-xl font-semibold">Delete Shipment?</h3>
+          <Button onClick={toggleShow} className="mr-3 ml-24 bg-gray-500">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} className="bg-red-500">
+            Confirm
+          </Button>
+        </>
+      )}
     </Modal>
   );
 }

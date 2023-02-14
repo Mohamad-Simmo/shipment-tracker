@@ -6,7 +6,13 @@ import { Path } from 'react-hook-form';
 type Props<T extends FieldValues> = Pick<
   GenericInputProps<T>,
   'register' | 'options'
-> & { icon: JSX.Element; label: string; name: Path<T>; className?: string };
+> & {
+  icon: JSX.Element;
+  label: string;
+  name: Path<T>;
+  className?: string;
+  activeColor: string;
+};
 
 function Radio<T extends FieldValues>(props: Props<T>) {
   return (
@@ -20,7 +26,10 @@ function Radio<T extends FieldValues>(props: Props<T>) {
         className="peer hidden"
       />
       <label
-        className="flex cursor-pointer justify-center gap-2 rounded-lg border border-gray-400 px-8 py-4 text-xl font-semibold text-gray-500 peer-checked:border-primary peer-checked:bg-primary peer-checked:text-light peer-checked:ring-2 peer-checked:ring-primary"
+        className={
+          props.activeColor +
+          ' flex cursor-pointer justify-center gap-2 rounded-lg border border-gray-400 px-8 py-4 text-xl font-semibold text-gray-500 peer-checked:text-light peer-checked:ring-2'
+        }
         htmlFor={props.label}
       >
         <span>{cloneElement(props.icon)}</span>

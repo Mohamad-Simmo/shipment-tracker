@@ -61,3 +61,7 @@ export const getShipments = async () => {
 export const getShipmentById = async (id: string) => {
   return (await axiosToken.get<Shipment>('/shipments/' + id)).data;
 };
+
+export const deleteShipment = (id: string) => {
+  return axiosToken.delete('/shipments/' + id);
+};

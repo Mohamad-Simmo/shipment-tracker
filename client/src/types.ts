@@ -30,6 +30,9 @@ export type RegisterInputs = {
 };
 
 export type ShipmentInputs = {
+  shipment_id?: number;
+  route_id?: number;
+  waybill_id?: number;
   shipper_id: number;
   recipient_id: number;
   carrier_id: number;
@@ -37,11 +40,13 @@ export type ShipmentInputs = {
   destination: string;
   stops: string;
   method: 'sea' | 'air' | 'land';
+  status: 'pending' | 'in transit' | 'delivered' | 'exception';
   weight: number;
   shipping_date: Date;
   delivery_date: Date;
   instructions: string;
   description: string;
+  exception: string;
 };
 
 export type FormProps = {
@@ -100,7 +105,7 @@ export type Route = {
   id: number;
   origin: string;
   destination: string;
-  stop?: string;
+  stops?: string;
   method: 'air' | 'land' | 'sea';
 };
 

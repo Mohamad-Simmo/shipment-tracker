@@ -8,26 +8,6 @@ use Illuminate\Http\Request;
 class RouteController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,41 +15,11 @@ class RouteController extends Controller
      */
     public function store($fields)
     {
-        return Route::create($fields);
-    }
+        $id = $fields['id'];
+        unset($fields['id']);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Route  $route
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Route $route)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Route  $route
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Route $route)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Route  $route
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Route $route)
-    {
-        //
+        $rest = $fields;
+        return Route::updateOrCreate(['id' => $id], $rest);
     }
 
     /**
@@ -78,8 +28,8 @@ class RouteController extends Controller
      * @param  \App\Models\Route  $route
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Route $route)
+    public function destroy($id)
     {
-        //
+        return Route::destroy($id);
     }
 }

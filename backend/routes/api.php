@@ -28,8 +28,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/customers', [CustomerController::class, 'index']);
     Route::get('/carriers', [CarrierController::class, 'index']);
     Route::get('/shipments', [ShipmentController::class, 'index']);
-    Route::get('/shipments/{id}', [ShipmentController::class, 'show']);
     Route::post('/shipments', [ShipmentController::class, 'store']);
+    Route::get('/shipments/{id}', [ShipmentController::class, 'show']);
+    Route::delete('/shipments/{id}', [ShipmentController::class, 'destroy']);
 });
 
 

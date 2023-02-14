@@ -1,11 +1,8 @@
 import Button from '../components/Button';
-import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { getShipments } from '../api';
+import { Link, useNavigate } from 'react-router-dom';
 import { uppercase } from '../lib/helpers';
 import { RiDeleteBinLine, RiEditLine, RiEyeLine } from 'react-icons/ri';
 import useToggle from '../hooks/useToggle';
-import Modal from '../components/Modal';
 import MoreInformationModal from '../components/MoreInformationModal';
 import { useState } from 'react';
 import useShipments from '../hooks/useShipments';
@@ -16,6 +13,7 @@ function Home() {
   const [showDelete, toggleDelete] = useToggle();
   const { data, isLoading, isError, error } = useShipments();
   const [shipmentId, setShipmentId] = useState('');
+  const navigate = useNavigate();
 
   return (
     <>
@@ -58,44 +56,53 @@ function Home() {
                       {shipment.waybill.recipient.contact.name}
                     </td>
                     <td className="p-2">{shipment.carrier.contact.name}</td>
-                    <td className="flex items-center gap-1 p-2 ">
-                      <div
-                        className={`h-4 w-4 rounded-full ${
-                          shipment.status === 'pending'
-                            ? 'bg-yellow-400'
-                            : shipment.status === 'in transit'
-                            ? 'bg-blue-400'
-                            : shipment.status === 'delivered'
-                            ? 'bg-green-400'
-                            : shipment.status === 'exception'
-                            ? 'bg-red-400'
-                            : ''
-                        }`}
-                      ></div>
-                      {uppercase(shipment.status)}
-                    </td>
                     <td className="p-2">
-                      <button
-                        onClick={() => {
-                          setShipmentId(shipment.id);
-                          toggleInfo();
-                        }}
-                        className="rounded-lg bg-blue-500 p-1"
-                      >
-                        <RiEyeLine className="h-4 w-4 text-light" />
-                      </button>{' '}
-                      <button className="rounded-lg bg-green-500 p-1">
-                        <RiEditLine className="h-4 w-4 text-light" />
-                      </button>{' '}
-                      <button
-                        onClick={() => {
-                          setShipmentId(shipment.id);
-                          toggleDelete();
-                        }}
-                        className="rounded-lg bg-red-500 p-1"
-                      >
-                        <RiDeleteBinLine className="h-4 w-4 text-light" />
-                      </button>
+                      <div className='flex gap-1'>
+                        <div
+                          className={`h-4 w-4 rounded-full ${
+                            shipment.status === 'pending'
+                              ? 'bg-yellow-400'
+                              : shipment.status === 'in transit'
+                              ? 'bg-blue-400'
+                              : shipment.status === 'delivered'
+                              ? 'bg-green-400'
+                              : shipment.status === 'exception'
+                              ? 'bg-red-400'
+                              : ''
+                          }`}
+                        ></div>
+                        {uppercase(shipment.status)}
+                      </div>
+                    </td>
+                    <td className="p-2 ">
+                      <div className="flex gap-1">
+                        <button
+                          onClick={() => {
+                            setShipmentId(shipment.id);
+                            toggleInfo();
+                          }}
+                          className="rounded-lg bg-blue-500 p-1"
+                        >
+                          <RiEyeLine className="h-4 w-4 text-light" />
+                        </button>
+                        <button
+                          className="rounded-lg bg-green-500 p-1"
+                          onClick={() =>
+                            navigate(`/shipments/update/${shipment.id}`)
+                          }
+                        >
+                          <RiEditLine className="h-4 w-4 text-light" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShipmentId(shipment.id);
+                            toggleDelete();
+                          }}
+                          className="rounded-lg bg-red-500 p-1"
+                        >
+                          <RiDeleteBinLine className="h-4 w-4 text-light" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

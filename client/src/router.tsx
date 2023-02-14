@@ -4,7 +4,7 @@ import AuthLayout from './components/AuthLayout';
 import Register from './views/Register';
 import Login from './views/Login';
 import Home from './views/Home';
-import CreateShipment from './views/CreateShipment';
+import ShipmentForm from './views/ShipmentForm';
 import Customers from './views/Customers';
 import Carriers from './views/Carriers';
 
@@ -23,7 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'shipments/create',
-        element: <CreateShipment />,
+        element: <ShipmentForm />,
+      },
+      {
+        path: 'shipments/update/:id',
+        element: <ShipmentForm />,
       },
       {
         path: 'customers',

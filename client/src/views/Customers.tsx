@@ -10,9 +10,10 @@ function Customers() {
   if (isError) return <ErrorMessage message={(error as AxiosError)?.message} />;
 
   return (
+    <div className="overflow-x-auto overflow-y-hidden rounded-t-lg">
     <table className="w-full table-auto  text-left text-sm text-gray-500">
       <thead>
-        <tr className="rounded-lg bg-dark">
+        <tr className="bg-gray-600">
           <th className="p-3 text-light">Name</th>
           <th className="p-3 text-light">Email</th>
           <th className="p-3 text-light">Phone</th>
@@ -30,6 +31,7 @@ function Customers() {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }
 export default Customers;
